@@ -46,5 +46,9 @@ function showBooks() {
     container.appendChild(book);
   }
 }
+const buttonAddBook = document.querySelector(".new-book");
+buttonAddBook.addEventListener("click", () => {
+  console.log("you clicked me!");
+});
 
 showBooks();
