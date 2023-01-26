@@ -46,9 +46,26 @@ function showBooks() {
     container.appendChild(book);
   }
 }
-const buttonAddBook = document.querySelector(".new-book");
-buttonAddBook.addEventListener("click", () => {
-  console.log("you clicked me!");
-});
-
 showBooks();
+
+// const buttonAddBook = document.querySelector(".new-book");
+// buttonAddBook.addEventListener("click", () => {
+//   const form = document.querySelector('.new-book-form');
+//   form.classList.add('opened');
+// });
+
+document
+  .querySelector(".submit-btn")
+  .addEventListener("click", function (event) {
+    event.preventDefault();
+    const title = document.querySelector("#title").value;
+    const author = document.querySelector("#author").value;
+    const pages = document.querySelector("#pages").value;
+    const read = document.querySelector("#read").checked;
+    console.log(title, author, pages, read);
+    addBookToLibrary(title, author, pages, read);
+    showBooks();
+  });
+
+const title = document.querySelector("#title").value;
+console.log(title);
