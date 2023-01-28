@@ -12,7 +12,7 @@
   background: rgb(203, 203, 203);
 }
 
-.new-book {
+.new-book-btn {
   padding: 10px 20px;
   font-size: 24px;
   cursor: pointer;
@@ -34,3 +34,7 @@
   display: block;
 }
 
+.book-title {
+  font-size: 20px;
+  font-weight: 700;
+}
