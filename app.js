@@ -25,18 +25,25 @@ addBookToLibrary("The Bell Jar", "Sylvia Plath", 294, false);
 function showBooks() {
   const container = document.querySelector(".container");
 
-  // //remove previously displayed books
-  // const removeDivs = document.querySelectorAll('.book');
-  // console.log('number of book divs', removeDivs);
+  //remove previously displayed books
+  const removeDivs = document.querySelectorAll(".book");
+  removeDivs.forEach((item) => item.remove());
 
   //loop over the library array and display each book
   myLibrary.forEach((myLibrary) => {
     const book = document.createElement("div");
     book.classList.add("book");
 
+    //creating remove book button
+    const removeBookBtn = document.createElement('button');
+    removeBookBtn.classList.add('remove-book-btn');
+    removeBookBtn.textContent = 'Remove';
+    book.appendChild(removeBookBtn);
+
+    
     // loop throught keys to display each on the book card
     for (let key in myLibrary) {
-      console.log(`${key}: ${myLibrary[key]}`);
+      // console.log(`${key}: ${myLibrary[key]}`);
       const text = document.createElement("p");
       text.classList.add(`book-${key}`);
       if (key === "read") {
@@ -55,13 +62,17 @@ function showBooks() {
 }
 showBooks();
 
+
+// display form after clicking the 'Add new book' button
 const buttonAddBook = document.querySelector(".new-book-btn");
 buttonAddBook.addEventListener("click", displayForm);
 
-function displayForm(){
-  document.querySelector('.new-book-form').classList.add('opened');
+function displayForm() {
+  document.querySelector(".new-book").classList.add("opened");
 }
 
+
+// intake the data user have entered
 document
   .querySelector(".submit-btn")
   .addEventListener("click", function (event) {
@@ -70,18 +81,14 @@ document
     const author = document.querySelector("#author").value;
     const pages = document.querySelector("#pages").value;
     const read = document.querySelector("#read").checked;
-    console.log(title, author, pages, read);
 
     // break out if any of these fields are empty
-    if ((title == '' || author == '' || pages == '')) {
+    if (title == "" || author == "" || pages == "") {
       return;
     }
-
     // call function to add new book
     addBookToLibrary(title, author, pages, read);
-    console.log(myLibrary);
-  //reset the form after successful submission
-  });
 
-const title = document.querySelector("#title").value;
-console.log(title);
+    //reset the form after successful submission
+    document.querySelector(".new-book-form").reset();
+  });
