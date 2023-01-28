@@ -30,7 +30,8 @@ function showBooks() {
   removeDivs.forEach((item) => item.remove());
 
   //loop over the library array and display each book
-  myLibrary.forEach((myLibrary) => {
+  let index = 0;
+  myLibrary.forEach((libraryItem) => {
     const book = document.createElement("div");
     book.classList.add("book");
 
@@ -38,22 +39,34 @@ function showBooks() {
     const removeBookBtn = document.createElement('button');
     removeBookBtn.classList.add('remove-book-btn');
     removeBookBtn.textContent = 'Remove';
+    
+    //link the data attribute of the remove button to the array and a card
+    removeBookBtn.dataset.index = index;
+    index++;
     book.appendChild(removeBookBtn);
 
-    
+    //adding event listener and removing item from the parent div
+
+    removeBookBtn.addEventListener('click', removeBookFromLibrary);
+
+    function removeBookFromLibrary() {
+      let bookIndex = parseInt(removeBookBtn.dataset.index);
+      myLibrary.splice(bookIndex, 1);
+      showBooks();
+    }
     // loop throught keys to display each on the book card
-    for (let key in myLibrary) {
+    for (let key in libraryItem) {
       // console.log(`${key}: ${myLibrary[key]}`);
       const text = document.createElement("p");
       text.classList.add(`book-${key}`);
       if (key === "read") {
-        if (myLibrary[key] === false) {
+        if (libraryItem[key] === false) {
           text.textContent = "not read yet";
         } else text.textContent = "read";
       } else if (key === "pages") {
-        text.textContent = `${myLibrary[key]} pages`;
+        text.textContent = `${libraryItem[key]} pages`;
       } else {
-        text.textContent = `${myLibrary[key]}`;
+        text.textContent = `${libraryItem[key]}`;
       }
       book.appendChild(text);
     }
@@ -61,7 +74,6 @@ function showBooks() {
   });
 }
 showBooks();
-
 
 // display form after clicking the 'Add new book' button
 const buttonAddBook = document.querySelector(".new-book-btn");
@@ -90,5 +102,5 @@ document
     addBookToLibrary(title, author, pages, read);
 
     //reset the form after successful submission
-    document.querySelector(".new-book-form").reset();
+    document.querySelector("#new-book-form").reset();
   });
