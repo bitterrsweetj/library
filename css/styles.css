@@ -18,7 +18,7 @@
   cursor: pointer;
 }
 
-.new-book-form form {
+.new-book form {
   width: 500px;
   display: grid;
   grid-template-columns: 1fr 2fr;
@@ -26,11 +26,11 @@
   justify-items: start;
 }
 
-.new-book-form {
+.new-book {
   display: none;
 }
 
-.new-book-form.opened {
+.new-book.opened {
   display: block;
 }
 
